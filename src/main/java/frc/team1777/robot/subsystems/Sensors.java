@@ -11,7 +11,7 @@ public class Sensors extends Subsystem
 {
 	public static Encoder leftEncoder = new Encoder(RobotMap.leftEncoderID[0], RobotMap.leftEncoderID[1], true, Encoder.EncodingType.k4X);
 	public static Encoder rightEncoder = new Encoder(RobotMap.rightEncoderID[0], RobotMap.rightEncoderID[1], false, Encoder.EncodingType.k4X);
-	// private static PigeonIMU pigeon = new PigeonIMU(RobotMap.pigeonID);
+	private static PigeonIMU pigeon = new PigeonIMU(RobotMap.pigeonID);
 	
 	public void initDefaultCommand() {}
 	
@@ -40,12 +40,12 @@ public class Sensors extends Subsystem
 	 */
 	public void tarePigeon()
 	{
-		// pigeon.setYaw(0, 0);
+		pigeon.setYaw(0, 0);
 	}
 	
 	/**
-	 * Returns the distance travelled by the robot since the last reset. Extremely inaccurate when turning.
-	 * @return The distance travelled, in inches.
+	 * Returns the distance traveled by the robot since the last reset. Extremely inaccurate when turning.
+	 * @return The distance traveled, in inches.
 	 */
 	public double getDistance()
 	{
@@ -60,7 +60,7 @@ public class Sensors extends Subsystem
 	public double getRotation()
 	{
 		double[] gyroData = {0.0, 0.0, 0.0};
-		// pigeon.getYawPitchRoll(gyroData);
+		pigeon.getYawPitchRoll(gyroData);
 		return gyroData[0];
 	}
 }

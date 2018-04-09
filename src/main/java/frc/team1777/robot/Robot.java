@@ -36,7 +36,6 @@ public class Robot extends IterativeRobot
 	
 	public static Command autonomousCommand;
 	public static SendableChooser<String> autoPositionChooser;
-	public static SendableChooser<String> autoTypeChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -72,12 +71,6 @@ public class Robot extends IterativeRobot
 		autoPositionChooser.addObject("Right side", "R");
 		autoPositionChooser.addObject("Everything is broken", "B");
 		SmartDashboard.putData("autonomous/autoPosition", autoPositionChooser);
-		
-		autoTypeChooser = new SendableChooser<String>();
-		autoTypeChooser.addDefault("Programmatic", "programmatic");
-		autoTypeChooser.addObject("Recording", "recording");
-		autoTypeChooser.addObject("Nothing?????", "nothing");
-		SmartDashboard.putData("autonomous.autoType", autoTypeChooser);
 		
 		CameraServer.getInstance().startAutomaticCapture();
 	}
@@ -119,115 +112,54 @@ public class Robot extends IterativeRobot
 		fieldInfo.getSwitchScaleColors();
 		
 		char autoPosition = SmartDashboard.getString("autonomous/autoPosition", "B").charAt(0);
-		String autoType = SmartDashboard.getString("autonomous/autoType", "programmatic");
 		
-		if (autoType == "nothing")
-		{
-			
-		}
-		else if (autoPosition == 'B')
+		if (autoPosition == 'B')
 		{
 			System.out.println("everything is ded, so let's just cross line");
 			autonomousCommand = new AutonomousCrossLine();
 		}
-		else if (autoType == "recording")
-		{
-			if (autoPosition == 'L')
-			{
-				System.out.println("Left autonomous selected");
-				if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
-				{
-					System.out.println("We guessed right! :D");
-					autonomousCommand = new ReplayAuto("left_right.auto");
-				}
-				else
-				{
-					System.out.println("We guessed wrong! D:");
-					autonomousCommand = new ReplayAuto("left_wrong.auto");
-				}
-			}
-			else if (autoPosition == 'M')
-			{
-				System.out.println("Middle autonomous selected");
-				if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
-				{
-					System.out.println("It's on the left. *double oof*");
-					autonomousCommand = new ReplayAuto("middle_left.auto");
-				}
-				else
-				{
-					System.out.println("It's on the right. *oof*");
-					autonomousCommand = new ReplayAuto("middle_right.auto");
-				}
-			}
-			else  // autoPosition == 'R'
-			{
-				System.out.println("Right autonomous selected");
-				if (fieldInfo.switchScaleColors[0] == FieldInfo.side.right)
-				{
-					System.out.println("We guessed right! :D");
-					autonomousCommand = new ReplayAuto("right_right.auto");
-				}
-				else
-				{
-					System.out.println("We guessed wrong! D:");
-					autonomousCommand = new ReplayAuto("right_wrong.auto");
-				}
-			}
-		}
-		else
-		{
-			if (autoPosition == 'L')
-			{
-				System.out.println("Left autonomous selected");
-				if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
-				{
-					System.out.println("We guessed right! :D");
-					autonomousCommand = new AutonomousLeftRight();
-				}
-				else
-				{
-					System.out.println("We guessed wrong! D:");
-					autonomousCommand = new AutonomousLeftWrong();
-				}
-			}
-			else if (autoPosition == 'M')
-			{
-				System.out.println("Middle autonomous selected");
-				if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
-				{
-					System.out.println("It's on the left. *double oof*");
-					autonomousCommand = new AutonomousMiddleLeft();
-				}
-				else
-				{
-					System.out.println("It's on the right. *oof*");
-					autonomousCommand = new AutonomousMiddleRight();
-				}
-			}
-			else  // autoPosition == 'R'
-			{
-				System.out.println("Right autonomous selected");
-				if (fieldInfo.switchScaleColors[0] == FieldInfo.side.right)
-				{
-					System.out.println("We guessed right! :D");
-					autonomousCommand = new AutonomousRightRight();
-				}
-				else
-				{
-					System.out.println("We guessed wrong! D:");
-					autonomousCommand = new AutonomousRightWrong();
-				}
-			}
-		}
 		
-		if (autonomousCommand != null)
+		if (autoPosition == 'L')
 		{
-			autonomousCommand.start();
+			System.out.println("Left autonomous selected");
+			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
+			{
+				System.out.println("We guessed right! :D");
+				autonomousCommand = new ReplayAuto("left_right.auto");
+			}
+			else
+			{
+				System.out.println("We guessed wrong! D:");
+				autonomousCommand = new ReplayAuto("left_wrong.auto");
+			}
 		}
-		else
+		else if (autoPosition == 'M')
 		{
-			System.out.println("No autonomous selected?????????");
+			System.out.println("Middle autonomous selected");
+			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
+			{
+				System.out.println("It's on the left. *double oof*");
+				autonomousCommand = new ReplayAuto("middle_left.auto");
+			}
+			else
+			{
+				System.out.println("It's on the right. *oof*");
+				autonomousCommand = new ReplayAuto("middle_right.auto");
+			}
+		}
+		else  // autoPosition == 'R'
+		{
+			System.out.println("Right autonomous selected");
+			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.right)
+			{
+				System.out.println("We guessed right! :D");
+				autonomousCommand = new ReplayAuto("right_right.auto");
+			}
+			else
+			{
+				System.out.println("We guessed wrong! D:");
+				autonomousCommand = new ReplayAuto("right_wrong.auto");
+			}
 		}
 	}
 

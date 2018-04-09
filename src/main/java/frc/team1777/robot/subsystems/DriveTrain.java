@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team1777.robot.Robot;
 import frc.team1777.robot.RobotMap;
 import frc.team1777.robot.commands.TeleopDrive;
@@ -41,15 +42,23 @@ public class DriveTrain extends Subsystem
 	
 	public void teleopDrive()
 	{
-		// joystick values are automatically clamped to [-1, 1]
-		drive.arcadeDrive(Robot.oi.getX(), Robot.oi.getRotation());
-		if (Robot.oi.getTransmission())
+		if (SmartDashboard.getBoolean("kidMode", false))
 		{
-			fastTransmission();
+			drive.arcadeDrive(Robot.oi.getX() * .5, Robot.oi.getRotation() * .5);
+			slowTransmission();
 		}
 		else
 		{
-			slowTransmission();
+			// joystick values are automatically clamped to [-1, 1]
+			drive.arcadeDrive(Robot.oi.getX(), Robot.oi.getRotation());
+			if (Robot.oi.getTransmission())
+			{
+				fastTransmission();
+			}
+			else
+			{
+				slowTransmission();
+			}
 		}
 	}
 	

@@ -187,12 +187,12 @@ public class Robot extends IterativeRobot
 	public void teleopPeriodic() {
 		if (oi.getStartRecordButton() & !recorder.isRecording)
 		{
-			if (SmartDashboard.getString("recording/FileName", "") != "")
+			if (SmartDashboard.getString("recording/fileName", "") != "")
 			{
 				recorder.isRecording = true;
 				System.out.println("Starting recording: " +
-								   SmartDashboard.getString("recording/FileName", ""));
-				Command cmd = new RecordAuto(SmartDashboard.getString("recording/FileName", "auto.auto"));
+								   SmartDashboard.getString("recording/fileName", ""));
+				Command cmd = new RecordAuto(SmartDashboard.getString("recording/fileName", "auto.auto"));
 				cmd.start();
 			}
 			else
@@ -201,11 +201,15 @@ public class Robot extends IterativeRobot
 			}
 		}
 		
-		SmartDashboard.putNumber("Sensors/distance", sensors.getDistance());
+		SmartDashboard.putNumber("Sensors/leftEncoder", Sensors.leftEncoder.getDistance());
+		SmartDashboard.putNumber("Sensors/rightEncoder", Sensors.rightEncoder.getDistance());
 		SmartDashboard.putNumber("Sensors/angle", sensors.getRotation());
+		
 		SmartDashboard.putBoolean("Elevator/atBottom", elevator.isElevatorAtBottom());
+		SmartDashboard.putBoolean("Elevator/atMiddle", elevator.isElevatorAtMiddle());
 		SmartDashboard.putBoolean("Elevator/atTop", elevator.isElevatorAtTop());
-		SmartDashboard.putNumber("Jetson/angle", jetson.getAngle());
+		
+		// SmartDashboard.putNumber("Jetson/angle", jetson.getAngle());
 		
 		SmartDashboard.putBoolean("recording/isRecording", recorder.isRecording);
 		

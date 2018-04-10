@@ -54,7 +54,7 @@ public class ReplayAuto extends Command
 		
 		lastFrame = new InputFrame(line);
 		
-		Robot.drive.autonomousDrive(lastFrame.driveY, lastFrame.driveX);
+		Robot.drive.autonomousDrive(lastFrame.driveX, lastFrame.driveY);
 		if (lastFrame.highGear)
 		{
 			Robot.drive.fastTransmission();
@@ -64,7 +64,7 @@ public class ReplayAuto extends Command
 			Robot.drive.slowTransmission();
 		}
 		Robot.elevator.elevatorMove(lastFrame.elevator);
-		Robot.claw.control(lastFrame.clawWheel, false);
+		Robot.claw.control(lastFrame.clawWheel, lastFrame.clawSolenoid);
 	}
 	
 	protected boolean isFinished()

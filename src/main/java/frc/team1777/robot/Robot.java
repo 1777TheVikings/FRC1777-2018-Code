@@ -119,48 +119,51 @@ public class Robot extends IterativeRobot
 			autonomousCommand = new AutonomousCrossLine();
 		}
 		
-		if (autoPosition == 'L')
-		{
-			System.out.println("Left autonomous selected");
-			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
-			{
-				System.out.println("We guessed right! :D");
-				autonomousCommand = new ReplayAuto("left_right.auto");
-			}
-			else
-			{
-				System.out.println("We guessed wrong! D:");
-				autonomousCommand = new ReplayAuto("left_wrong.auto");
-			}
-		}
-		else if (autoPosition == 'M')
-		{
-			System.out.println("Middle autonomous selected");
-			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
-			{
-				System.out.println("It's on the left. *double oof*");
-				autonomousCommand = new ReplayAuto("middle_left.auto");
-			}
-			else
-			{
-				System.out.println("It's on the right. *oof*");
-				autonomousCommand = new ReplayAuto("middle_right.auto");
-			}
-		}
-		else  // autoPosition == 'R'
-		{
-			System.out.println("Right autonomous selected");
-			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.right)
-			{
-				System.out.println("We guessed right! :D");
-				autonomousCommand = new ReplayAuto("right_right.auto");
-			}
-			else
-			{
-				System.out.println("We guessed wrong! D:");
-				autonomousCommand = new ReplayAuto("right_wrong.auto");
-			}
-		}
+//		if (autoPosition == 'L')
+//		{
+//			System.out.println("Left autonomous selected");
+//			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
+//			{
+//				System.out.println("We guessed right! :D");
+//				autonomousCommand = new ReplayAuto("left_right.auto");
+//			}
+//			else
+//			{
+//				System.out.println("We guessed wrong! D:");
+//				autonomousCommand = new ReplayAuto("left_wrong.auto");
+//			}
+//		}
+//		else if (autoPosition == 'M')
+//		{
+//			System.out.println("Middle autonomous selected");
+//			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.left)
+//			{
+//				System.out.println("It's on the left. *double oof*");
+//				autonomousCommand = new ReplayAuto("middle_left.auto");
+//			}
+//			else
+//			{
+//				System.out.println("It's on the right. *oof*");
+//				autonomousCommand = new ReplayAuto("middle_right.auto");
+//			}
+//		}
+//		else  // autoPosition == 'R'
+//		{
+//			System.out.println("Right autonomous selected");
+//			if (fieldInfo.switchScaleColors[0] == FieldInfo.side.right)
+//			{
+//				System.out.println("We guessed right! :D");
+//				autonomousCommand = new ReplayAuto("right_right.auto");
+//			}
+//			else
+//			{
+//				System.out.println("We guessed wrong! D:");
+//				autonomousCommand = new ReplayAuto("right_wrong.auto");
+//			}
+//		}
+		
+		autonomousCommand = new ReplayAuto("test.auto");
+		autonomousCommand.start();
 	}
 
 	/**

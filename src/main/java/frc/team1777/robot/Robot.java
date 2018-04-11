@@ -206,7 +206,6 @@ public class Robot extends IterativeRobot
 		
 		SmartDashboard.putNumber("Sensors/leftEncoder", Sensors.leftEncoder.getDistance());
 		SmartDashboard.putNumber("Sensors/rightEncoder", Sensors.rightEncoder.getDistance());
-		SmartDashboard.putNumber("Sensors/accel", sensors.getAccel());
 		SmartDashboard.putNumber("Sensors/angle", sensors.getRotation());
 		
 		SmartDashboard.putBoolean("Elevator/atBottom", elevator.isElevatorAtBottom());

@@ -3,8 +3,10 @@ package frc.team1777.robot;
 import frc.team1777.robot.RobotMap;
 import frc.team1777.robot.commands.autonomous.RecordAuto;
 import frc.team1777.robot.commands.autonomous.ReplayAuto;
+import frc.team1777.robot.commands.autonomous.TurnWithPID;
 import frc.team1777.robot.commands.autonomous.competition.*;
 import frc.team1777.robot.subsystems.*;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -15,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.networktables.*;
+
 
 public class Robot extends IterativeRobot
 {
@@ -50,7 +52,6 @@ public class Robot extends IterativeRobot
 		fieldInfo = new FieldInfo();
 		jetson = new Jetson();
 		recorder = new Recorder();
-		pdp = new PowerDistributionPanel();
 		
 		controller = new XboxController(0);
 		
@@ -61,9 +62,8 @@ public class Robot extends IterativeRobot
 		
 		SmartDashboard.putString("recorder/FileName", "");
 		
-		// necessary for Jetson video stream
 		NetworkTableInstance.getDefault().getTable("CameraPublisher").getSubTable("Jetson").getEntry("streams")
-							.setStringArray(new String[] {"mjpeg:http://tegra-ubuntu.local:1181/mjpg"});
+							.setStringArray(new String[] {"http://tegra-ubuntu.local:80/mjpg"});
 		
 		autoPositionChooser = new SendableChooser<String>();
 		autoPositionChooser.addDefault("Left side", "L");
@@ -92,7 +92,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void disabledPeriodic() {
 		fieldInfo.getAllianceColor();
-		
 		Scheduler.getInstance().run();
 	}
 
@@ -162,7 +161,8 @@ public class Robot extends IterativeRobot
 //			}
 //		}
 		
-		autonomousCommand = new ReplayAuto("test.auto");
+		// autonomousCommand = new ReplayAuto("test.auto");
+		autonomousCommand = new TurnWithPID();
 		autonomousCommand.start();
 	}
 
@@ -171,6 +171,8 @@ public class Robot extends IterativeRobot
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		SmartDashboard.putNumber("Sensors/angle", sensors.getRotation());
+		
 		Scheduler.getInstance().run();
 	}
 

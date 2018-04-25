@@ -19,7 +19,7 @@ public class DriveTrain extends Subsystem
 	private static WPI_TalonSRX driveRightFrontMotor = new WPI_TalonSRX(RobotMap.rightFrontMotor);
 	private static WPI_TalonSRX driveRightRearMotor = new WPI_TalonSRX(RobotMap.rightRearMotor);
 	private static SpeedControllerGroup driveRight = new SpeedControllerGroup(driveRightFrontMotor, driveRightRearMotor);
-	private static DifferentialDrive drive = new DifferentialDrive(driveRight, driveLeft);
+	public static DifferentialDrive drive = new DifferentialDrive(driveRight, driveLeft);
 	
 	private static DoubleSolenoid transSolenoid = new DoubleSolenoid(RobotMap.transSolenoidID[0], RobotMap.transSolenoidID[1]);
 	

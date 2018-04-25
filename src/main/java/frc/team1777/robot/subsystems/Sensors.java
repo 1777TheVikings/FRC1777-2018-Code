@@ -11,7 +11,7 @@ public class Sensors extends Subsystem
 {
 	public static Encoder leftEncoder = new Encoder(RobotMap.leftEncoderID[0], RobotMap.leftEncoderID[1], true, Encoder.EncodingType.k4X);
 	public static Encoder rightEncoder = new Encoder(RobotMap.rightEncoderID[0], RobotMap.rightEncoderID[1], false, Encoder.EncodingType.k4X);
-	private static PigeonIMU pigeon = new PigeonIMU(RobotMap.pigeonID);
+	public static PigeonIMU pigeon = new PigeonIMU(RobotMap.pigeonID);
 	
 	public void initDefaultCommand() {}
 	

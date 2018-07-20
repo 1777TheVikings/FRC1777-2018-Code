@@ -1,7 +1,6 @@
 package frc.team1777.robot.commands.autonomous.competition;
 
 import frc.team1777.robot.Robot;
-import frc.team1777.robot.commands.GetJetsonAngle;
 import frc.team1777.robot.commands.autonomous.*;
 import frc.team1777.robot.commands.autonomous.AutoHistory.ActionType;
 
@@ -51,13 +50,13 @@ public class AutonomousRightRight extends AutoBase
 		moveHistory.add(new AutoHistory[] {new AutoHistory(ActionType.linear, 114.5)});
 		
 		// 8
-		addSequential(new GetJetsonAngle());
-		addSequential(new AutonomousMoveAngular(Robot.jetson.getSavedAngle()));
+		float jetsonAngle = Robot.networking.getJetsonAngle();
+		addSequential(new AutonomousMoveAngular(jetsonAngle));
 		addSequential(new AutonomousPause(0.5));
-		moveHistory.add(new AutoHistory[] {new AutoHistory(ActionType.angular, Robot.jetson.getSavedAngle())});
+		moveHistory.add(new AutoHistory[] {new AutoHistory(ActionType.angular, jetsonAngle)});
 		
 		// 9 + 10
-		double cubeDist = 6 / Math.sin(Robot.jetson.getSavedAngle());
+		double cubeDist = 6 / Math.sin(jetsonAngle);
 		addParallel(new AutonomousMoveLinear(cubeDist));
 		addSequential(new AutonomousClawIntake());  // 
 		addSequential(new AutonomousPause(0.5));

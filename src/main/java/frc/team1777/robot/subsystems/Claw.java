@@ -66,7 +66,3 @@ public class Claw extends Subsystem
 		clawSolenoid.set(DoubleSolenoid.Value.kForward);
 	}
 }
-/**
-*
-*sub to my youtube channel!
-*/

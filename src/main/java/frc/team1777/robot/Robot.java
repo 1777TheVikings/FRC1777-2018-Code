@@ -3,7 +3,6 @@ package frc.team1777.robot;
 import frc.team1777.robot.RobotMap;
 import frc.team1777.robot.commands.autonomous.RecordAuto;
 import frc.team1777.robot.commands.autonomous.ReplayAuto;
-import frc.team1777.robot.commands.autonomous.TurnWithPID;
 import frc.team1777.robot.commands.autonomous.competition.*;
 import frc.team1777.robot.subsystems.*;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -28,7 +27,7 @@ public class Robot extends IterativeRobot
 	public static Claw claw;
 	public static Sensors sensors;
 	public static FieldInfo fieldInfo;
-	public static Jetson jetson;
+	public static Networking networking;
 	public static Recorder recorder;
 	public static PowerDistributionPanel pdp;
 	
@@ -50,7 +49,7 @@ public class Robot extends IterativeRobot
 		claw = new Claw();
 		sensors = new Sensors();
 		fieldInfo = new FieldInfo();
-		jetson = new Jetson();
+		networking = new Networking();
 		recorder = new Recorder();
 		
 		controller = new XboxController(0);
@@ -162,8 +161,7 @@ public class Robot extends IterativeRobot
 //		}
 		
 		// autonomousCommand = new ReplayAuto("test.auto");
-		autonomousCommand = new TurnWithPID();
-		autonomousCommand.start();
+		// autonomousCommand.start();
 	}
 
 	/**
@@ -206,17 +204,7 @@ public class Robot extends IterativeRobot
 			}
 		}
 		
-		SmartDashboard.putNumber("Sensors/leftEncoder", Sensors.leftEncoder.getDistance());
-		SmartDashboard.putNumber("Sensors/rightEncoder", Sensors.rightEncoder.getDistance());
-		SmartDashboard.putNumber("Sensors/angle", sensors.getRotation());
-		
-		SmartDashboard.putBoolean("Elevator/atBottom", elevator.isElevatorAtBottom());
-		SmartDashboard.putBoolean("Elevator/atMiddle", elevator.isElevatorAtMiddle());
-		SmartDashboard.putBoolean("Elevator/atTop", elevator.isElevatorAtTop());
-		
-		// SmartDashboard.putNumber("Jetson/angle", jetson.getAngle());
-		
-		SmartDashboard.putBoolean("recording/isRecording", recorder.isRecording);
+		networking.putAll();
 		
 		Scheduler.getInstance().run();
 	}

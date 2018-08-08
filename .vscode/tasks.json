@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "./gradlew build",
             "windows": {
-                "command": "gradlew.bat build"
+                "command": "./gradlew.bat build"
             },
             "group": {
                 "kind": "build",
@@ -28,7 +28,7 @@
             "type": "shell",
             "command": "./gradlew deploy",
             "windows": {
-                "command": "gradlew.bat deploy"
+                "command": "./gradlew.bat deploy"
             },
             "group": {
                 "kind": "build",
@@ -48,7 +48,7 @@
             "type": "shell",
             "command": "./gradlew riolog -Pfakeds",
             "windows": {
-                "command": "gradlew.bat riolog -Pfakeds"
+                "command": "./gradlew.bat riolog -Pfakeds"
             },
             "group": "none",
             "presentation": {
